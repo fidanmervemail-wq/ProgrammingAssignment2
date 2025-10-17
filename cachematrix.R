@@ -1,24 +1,38 @@
-> makeCacheMatrix <- function(x = matrix()) {
-     s <- NULL
+## set the input x to be a matrix
+## set the solved value "z" to be null
+## changed any references to "mean" to "solve"
+
+#MakeCacheMatrix#
+
+>makeCacheMatrix <- function(x = matrix()) {
+     z <- NULL
      set <- function(y){
          x <<- y
-         s <<- NULL
+         z <<- NULL
      }
      get <- function()x
-     setInverse <- function(inverse) s <<- inverse
-     getInverse <- function() s 
+     setInverse <- function(inverse) z <<- inverse
+     getInverse <- function() z 
      list(set = set, get = get, 
           setInverse = setInverse, 
           getInverse = getInverse)
  }
+
+
+##
+## changed "mean" to "solve" and "z" again
+
+#CacheSolve#
+
  cacheSolve <- function(x, ...) {
-     s <- x$getInverse()
-     if(!is.null(s)){
+     z <- x$getInverse()
+     if(!is.null(z)){
          message("getting cached data")
-         return(s)
+         return(z)
      }
      mat <- x$get()
-     s <- solve(mat,...)
-     x$setInverse(s)
-     s
+     z <- solve(mat,...)
+     x$setInverse(z)
+     z
  }
+
